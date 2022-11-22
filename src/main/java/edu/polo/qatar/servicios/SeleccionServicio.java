@@ -14,7 +14,7 @@ public class SeleccionServicio {
 
     public List<Seleccion> getAll()
     {
-        List<Seleccion> lista = new ArrayList();
+        List<Seleccion> lista = new ArrayList<Seleccion>();
         seleccionRepositorio.findAll().forEach(registro -> lista.add(registro));
         return lista;
     }

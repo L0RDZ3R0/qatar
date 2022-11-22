@@ -14,7 +14,7 @@ public class JugadorServicio {
 
     public List<Jugador> getAll()
     {
-        List<Jugador> lista = new ArrayList();
+        List<Jugador> lista = new ArrayList<Jugador>();
         jugadorRepositorio.findAll().forEach(registro -> lista.add(registro));
         return lista;
     }

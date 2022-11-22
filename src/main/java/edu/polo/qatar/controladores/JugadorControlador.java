@@ -4,11 +4,7 @@ import edu.polo.qatar.entidades.*;
 import edu.polo.qatar.servicios.*;
 import java.io.*;
 import java.nio.file.Paths;
-import java.util.*;
-import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,7 +71,7 @@ public class JugadorControlador {
 
         jugador.setFoto(foto);
         jugadorServicio.save(jugador);
-        return new RedirectView("/jugadores/editar/" + jugador.getId());
+        return new RedirectView("/jugadores");
     }
 
     @GetMapping("/editar/{id}")
