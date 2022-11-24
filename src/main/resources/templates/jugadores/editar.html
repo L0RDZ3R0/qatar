@@ -5,20 +5,24 @@
                 <div class="card-header">
                     Editar jugador
                 </div>
-                <form class="card-body" th:action="@{'/jugadores/{id}'(id=${jugador.id})}" th:method="PUT" enctype="multipart/form-data">
+                <form class="card-body" th:action="@{'/jugadores/editar/{id}' (id=${jugador.id})}" th:object="${jugador}" th:method="PUT" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" th:field="${jugador.nombre}">
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:errorClass="'is-invalid'">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                     </div>
                     <div class="mb-3">
                         <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" th:field="${jugador.fechaNacimiento}">
+                        <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
                     </div>
                     <div class="mb-3">
                         <label for="seleccion" class="form-label">Selección</label>
-                        <select id="seleccion" name="seleccion" class="select2 form-select" required>
-                            <option th:each="s : ${selecciones}" th:value="${s.id}" th:text="${s.nombre}" th:selected="${s.id == jugador.seleccion.id}"></option>
+                        <select id="seleccion" th:field="*{seleccion}" class="select2 form-select" th:errorClass="'is-invalid'">
+                            <option value=""></option>
+                            <option th:each="s : ${selecciones}" th:value="${s.id}" th:text="${s.nombre}"></option>
                         </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('seleccion')}" th:errors="*{seleccion}"></div>
                     </div>
                     <div class="mb-3" th:if="${jugador.foto != null}">
                         <label>Foto actual del jugador</label>
@@ -42,6 +46,7 @@
     $(document).ready(function() {
         $('.select2').select2({
             placeholder: 'Seleccione una opción',
+            allowClear: true,
             width: '100%',
         });
     });
